@@ -21,6 +21,7 @@ import StatsView from './components/StatsView'
 import ShortcutsModal from './components/ShortcutsModal'
 import ToolMetrics from './components/ToolMetrics'
 import SettingsModal from './components/SettingsModal'
+import SplashScreen from './components/SplashScreen'
 
 const VIEWS = [
   { id: 'dashboard', label: 'Dashboard',      icon: '⬡' },
@@ -48,6 +49,7 @@ function ViewTitle({ title, subtitle }) {
 }
 
 export default function App() {
+  const [splash, setSplash] = useState(true)
   const [emails, setEmails] = useState(() => loadEmails())
   const [activity, setActivity] = useState(() => loadActivity())
   const [showForm, setShowForm] = useState(false)
@@ -142,6 +144,8 @@ export default function App() {
     setSelectedId(id)
     setView('dashboard')
   }
+
+  if (splash) return <SplashScreen onDone={() => setSplash(false)} />
 
   return (
     <div className="min-h-screen text-gray-100 font-sans">

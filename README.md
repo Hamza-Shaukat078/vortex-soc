@@ -88,6 +88,26 @@ Opens at `http://localhost:5173/vortex-soc/`
 
 ---
 
+## Adding API Keys (Deployed / Browser)
+
+If you're using the **live site** (GitHub Pages) or don't want to set up a local `.env`, you can enter keys directly in the app:
+
+1. Open the app in your browser
+2. Click the **⚙ gear icon** in the top-right corner of the header
+3. Paste your **GitHub Token** and/or **VirusTotal API Key**
+4. Click **Save Keys**
+
+Keys are saved to your browser's `localStorage` — they persist across sessions on that browser and are never sent to any server. Each user/device enters their own keys.
+
+**Getting the keys (both are free):**
+
+- **GitHub Token** → [github.com/settings/tokens](https://github.com/settings/tokens) → **Generate new token (classic)** → give it any name → no scopes needed → Generate → copy the `github_pat_...` value
+- **VirusTotal Key** → [virustotal.com](https://www.virustotal.com) → Sign up free → top-right avatar → **API Key**
+
+> To remove saved keys, open Settings again, clear the fields, and click Save — or clear your browser's site data.
+
+---
+
 ## Deployment (GitHub Pages)
 
 ```bash

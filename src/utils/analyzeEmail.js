@@ -1,3 +1,5 @@
+import { getGithubToken } from './keyStorage'
+
 const ENDPOINT = 'https://models.inference.ai.azure.com/chat/completions'
 const MODEL = 'gpt-4o-mini'
 
@@ -28,10 +30,8 @@ Guidelines:
 Return ONLY valid JSON, no markdown, no extra text.`
 
 export async function analyzeEmail(rawEmail) {
-  const token = import.meta.env.VITE_GITHUB_TOKEN
-  if (!token || token === 'paste_your_new_token_here') {
-    throw new Error('GitHub token not configured in .env file')
-  }
+  const token = getGithubToken()
+  if (!token) throw new Error('GitHub token not set — add it in Settings (gear icon)')
 
   const res = await fetch(ENDPOINT, {
     method: 'POST',

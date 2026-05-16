@@ -23,7 +23,7 @@ export default function VTScanner() {
       <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5">
         <h3 className="text-sm font-semibold text-white mb-1">VirusTotal Scanner</h3>
         <div className="mt-3 bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-4 py-3 text-sm text-yellow-400">
-          Add <code className="bg-black/20 px-1 rounded">VITE_VIRUSTOTAL_KEY</code> to your <code className="bg-black/20 px-1 rounded">.env</code> file to enable URL/IP scanning.
+          Add your VirusTotal API key in <strong>Settings</strong> (⚙ icon in the header) to enable URL/IP scanning.
         </div>
       </div>
     )

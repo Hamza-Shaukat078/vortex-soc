@@ -1,16 +1,14 @@
+import { getVTKey } from './keyStorage'
+
 const BASE = 'https://www.virustotal.com/api/v3'
 
-function getKey() {
-  return import.meta.env.VITE_VIRUSTOTAL_KEY || null
-}
-
 export function hasVTKey() {
-  return !!getKey()
+  return !!getVTKey()
 }
 
 async function vtFetch(path) {
-  const key = getKey()
-  if (!key) throw new Error('VirusTotal API key not configured')
+  const key = getVTKey()
+  if (!key) throw new Error('VirusTotal API key not configured — add it in Settings')
   const res = await fetch(`${BASE}${path}`, {
     headers: { 'x-apikey': key },
   })
@@ -24,10 +22,9 @@ export async function scanUrl(url) {
     const data = await vtFetch(`/urls/${id}`)
     return summariseStats(data.data.attributes.last_analysis_stats, url, 'url')
   } catch {
-    const encoded = encodeURIComponent(btoa(url))
     const submit = await fetch(`${BASE}/urls`, {
       method: 'POST',
-      headers: { 'x-apikey': getKey(), 'content-type': 'application/x-www-form-urlencoded' },
+      headers: { 'x-apikey': getVTKey(), 'content-type': 'application/x-www-form-urlencoded' },
       body: `url=${encodeURIComponent(url)}`,
     })
     if (!submit.ok) throw new Error('VT submit failed')

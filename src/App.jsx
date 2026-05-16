@@ -20,6 +20,7 @@ import SearchFilter from './components/SearchFilter'
 import StatsView from './components/StatsView'
 import ShortcutsModal from './components/ShortcutsModal'
 import ToolMetrics from './components/ToolMetrics'
+import SettingsModal from './components/SettingsModal'
 
 const VIEWS = [
   { id: 'dashboard', label: 'Dashboard',      icon: '⬡' },
@@ -58,6 +59,7 @@ export default function App() {
   const [query, setQuery] = useState('')
   const [verdictFilter, setVerdictFilter] = useState('')
   const [showShortcuts, setShowShortcuts] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
   const emlRef = useRef()
   const searchRef = useRef()
 
@@ -212,6 +214,12 @@ export default function App() {
 
           {/* Actions */}
           <div className="flex items-center gap-2 shrink-0">
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+              onClick={() => setShowSettings(true)}
+              className="w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 text-gray-600 hover:text-gray-300 text-sm transition-all"
+              title="API Keys / Settings">
+              ⚙
+            </motion.button>
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => setShowShortcuts(true)}
               className="w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 text-gray-600 hover:text-gray-300 text-sm transition-all"
@@ -382,6 +390,7 @@ export default function App() {
       </AnimatePresence>
 
       <ShortcutsModal open={showShortcuts} onClose={() => setShowShortcuts(false)} />
+      <SettingsModal open={showSettings} onClose={() => setShowSettings(false)} />
 
       {showExport && <div className="fixed inset-0 z-30" onClick={() => setShowExport(false)} />}
 

@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: var(--font-sans);
+  background: #020509;
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Cyber grid background ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+/* Corner dots at grid intersections */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, rgba(56,189,248,0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+#root { position: relative; z-index: 1; }
+
+/* ── Glow utilities ── */
+.glow-red    { box-shadow: 0 0 20px rgba(239,68,68,0.25),  0 0 60px rgba(239,68,68,0.08),  inset 0 0 20px rgba(239,68,68,0.03); }
+.glow-yellow { box-shadow: 0 0 20px rgba(234,179,8,0.25),  0 0 60px rgba(234,179,8,0.08),  inset 0 0 20px rgba(234,179,8,0.03); }
+.glow-green  { box-shadow: 0 0 20px rgba(34,197,94,0.25),  0 0 60px rgba(34,197,94,0.08),  inset 0 0 20px rgba(34,197,94,0.03); }
+.glow-blue   { box-shadow: 0 0 20px rgba(59,130,246,0.25), 0 0 60px rgba(59,130,246,0.08), inset 0 0 20px rgba(59,130,246,0.03); }
+
+.glow-red-sm    { box-shadow: 0 0 12px rgba(239,68,68,0.4); }
+.glow-yellow-sm { box-shadow: 0 0 12px rgba(234,179,8,0.4); }
+.glow-green-sm  { box-shadow: 0 0 12px rgba(34,197,94,0.4); }
+.glow-blue-sm   { box-shadow: 0 0 12px rgba(59,130,246,0.4); }
+
+/* ── Text glow ── */
+.text-glow-red    { text-shadow: 0 0 30px rgba(239,68,68,0.7),  0 0 60px rgba(239,68,68,0.3); }
+.text-glow-yellow { text-shadow: 0 0 30px rgba(234,179,8,0.7),  0 0 60px rgba(234,179,8,0.3); }
+.text-glow-green  { text-shadow: 0 0 30px rgba(34,197,94,0.7),  0 0 60px rgba(34,197,94,0.3); }
+.text-glow-blue   { text-shadow: 0 0 30px rgba(59,130,246,0.7), 0 0 60px rgba(59,130,246,0.3); }
+.text-glow-white  { text-shadow: 0 0 20px rgba(255,255,255,0.4); }
+
+/* ── Glass card ── */
+.glass {
+  background: rgba(15, 20, 30, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Animated gradient border ── */
+@keyframes border-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cyber-border {
+  position: relative;
+  isolation: isolate;
+}
+.cyber-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(239,68,68,0.6), rgba(59,130,246,0.2), rgba(239,68,68,0.1));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Scan line animation ── */
+@keyframes scan-line {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(400%); opacity: 0; }
+}
+
+.scan-overlay {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+}
+.scan-overlay::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(56,189,248,0.04), transparent);
+  animation: scan-line 4s ease-in-out infinite;
+}
+
+/* ── Pulse ring ── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── Number flicker on update ── */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  25%       { opacity: 0.7; }
+  50%       { opacity: 1; }
+  75%       { opacity: 0.8; }
+}
+.flicker { animation: flicker 0.3s ease; }
+
+/* ── Mono font ── */
+.font-mono { font-family: var(--font-mono) !important; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Input date picker dark */
+input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); cursor: pointer; }

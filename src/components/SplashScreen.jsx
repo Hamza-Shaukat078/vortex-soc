@@ -75,20 +75,24 @@ export default function SplashScreen({ onDone }) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           >
-            {/* VTX hex badge */}
+            {/* Logo */}
             <motion.div
               className="relative flex items-center justify-center mb-3"
               animate={{ y: [0, -4, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <div className="relative w-16 h-16 rounded-2xl flex items-center justify-center"
-                style={{
-                  background: 'rgba(239,68,68,0.1)',
-                  border: '1px solid rgba(239,68,68,0.3)',
-                  boxShadow: '0 0 30px rgba(239,68,68,0.2), inset 0 0 20px rgba(239,68,68,0.05)',
-                }}>
-                <span className="text-red-400 font-bold text-xl tracking-widest font-mono">VTX</span>
-              </div>
+              <motion.img
+                src="/vortex-soc/logo.png"
+                alt="VORTEX"
+                className="w-24 h-24 object-contain rounded-2xl"
+                style={{ filter: 'drop-shadow(0 0 24px rgba(239,68,68,0.6))' }}
+                animate={{ filter: [
+                  'drop-shadow(0 0 18px rgba(239,68,68,0.5))',
+                  'drop-shadow(0 0 36px rgba(239,68,68,0.9))',
+                  'drop-shadow(0 0 18px rgba(239,68,68,0.5))',
+                ]}}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              />
               {/* Corner accents */}
               {[0,1,2,3].map(i => (
                 <motion.div key={i}

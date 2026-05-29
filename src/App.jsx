@@ -165,17 +165,13 @@ export default function App() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center gap-4 shrink-0"
           >
-            <div className="relative">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-0 rounded-xl opacity-60"
-                style={{ background: 'conic-gradient(from 0deg, #ef4444, #3b82f6, #22c55e, #ef4444)' }}
-              />
-              <div className="relative w-10 h-10 rounded-xl bg-gray-950 flex items-center justify-center m-0.5">
-                <span className="text-red-400 font-bold text-xs tracking-widest">VTX</span>
-              </div>
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="relative w-10 h-10 rounded-xl overflow-hidden"
+              style={{ boxShadow: '0 0 16px rgba(239,68,68,0.35)' }}
+            >
+              <img src="/vortex-soc/logo.png" alt="VORTEX" className="w-full h-full object-cover" />
+            </motion.div>
             <div>
               <h1 className="text-xl font-bold leading-none tracking-tighter"
                 style={{ background: 'linear-gradient(90deg, #fff 40%, #ef4444)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>

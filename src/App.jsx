@@ -170,7 +170,7 @@ export default function App() {
               className="relative w-10 h-10 rounded-xl overflow-hidden"
               style={{ boxShadow: '0 0 16px rgba(239,68,68,0.35)' }}
             >
-              <img src="/vortex-soc/logo.png" alt="VORTEX" className="w-full h-full object-cover" />
+              <img src="./logo.png" alt="VORTEX" className="w-full h-full object-cover" />
             </motion.div>
             <div>
               <h1 className="text-xl font-bold leading-none tracking-tighter"

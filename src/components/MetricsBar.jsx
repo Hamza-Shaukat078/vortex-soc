@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
+import { Activity, ShieldAlert, AlertTriangle, ShieldCheck } from 'lucide-react'
 
 function CountUp({ value }) {
   const [display, setDisplay] = useState(0)
@@ -34,7 +35,7 @@ const CARDS = [
     dot: 'bg-sky-400',
     ring: 'bg-sky-400/20',
     badge: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
-    icon: '◈',
+    Icon: Activity,
   },
   {
     key: 'phishing',
@@ -48,7 +49,7 @@ const CARDS = [
     dot: 'bg-red-500',
     ring: 'bg-red-500/20',
     badge: 'bg-red-500/10 text-red-400 border-red-500/20',
-    icon: '⬡',
+    Icon: ShieldAlert,
     pulse: true,
   },
   {
@@ -63,7 +64,7 @@ const CARDS = [
     dot: 'bg-yellow-400',
     ring: 'bg-yellow-400/20',
     badge: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
-    icon: '◎',
+    Icon: AlertTriangle,
   },
   {
     key: 'legitimate',
@@ -77,7 +78,7 @@ const CARDS = [
     dot: 'bg-green-400',
     ring: 'bg-green-400/20',
     badge: 'bg-green-500/10 text-green-400 border-green-500/20',
-    icon: '◉',
+    Icon: ShieldCheck,
   },
 ]
 
@@ -128,7 +129,7 @@ export default function MetricsBar({ emails }) {
                   {card.label}
                 </span>
               </div>
-              <span className="text-lg opacity-20" style={{ color: card.color }}>{card.icon}</span>
+              <card.Icon size={16} style={{ color: card.color, opacity: 0.3 }} />
             </div>
 
             {/* Big number */}

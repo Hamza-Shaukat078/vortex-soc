@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from 'react'
+import { LayoutDashboard, Bot, MailSearch, ShieldAlert, Clock, Layers, Users, BarChart3, Settings, Keyboard, Upload } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
 import { loadEmails, addEmail, deleteEmail, updateEmail } from './utils/storage'
 import { loadActivity } from './utils/activityStorage'
@@ -24,14 +25,14 @@ import SettingsModal from './components/SettingsModal'
 import SplashScreen from './components/SplashScreen'
 
 const VIEWS = [
-  { id: 'dashboard', label: 'Dashboard',      icon: '⬡' },
-  { id: 'analyzer',  label: 'AI Analyzer',    icon: '◈' },
-  { id: 'headers',   label: 'Headers',        icon: '◎' },
-  { id: 'scanner',   label: 'VT Scanner',     icon: '⊕' },
-  { id: 'timeline',  label: 'Timeline',       icon: '◉' },
-  { id: 'campaigns', label: 'Campaigns',      icon: '⬢' },
-  { id: 'actors',    label: 'Threat Actors',  icon: '⬟' },
-  { id: 'stats',     label: 'Stats',          icon: '▲' },
+  { id: 'dashboard', label: 'Dashboard',     Icon: LayoutDashboard },
+  { id: 'analyzer',  label: 'AI Analyzer',   Icon: Bot },
+  { id: 'headers',   label: 'Headers',       Icon: MailSearch },
+  { id: 'scanner',   label: 'VT Scanner',    Icon: ShieldAlert },
+  { id: 'timeline',  label: 'Timeline',      Icon: Clock },
+  { id: 'campaigns', label: 'Campaigns',     Icon: Layers },
+  { id: 'actors',    label: 'Threat Actors', Icon: Users },
+  { id: 'stats',     label: 'Stats',         Icon: BarChart3 },
 ]
 
 function ViewTitle({ title, subtitle }) {
@@ -206,7 +207,7 @@ export default function App() {
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                   />
                 )}
-                <span className="relative text-xs opacity-60">{v.icon}</span>
+                <v.Icon size={13} className="relative opacity-60" />
                 <span className="relative">{v.label}</span>
               </motion.button>
             ))}
@@ -216,21 +217,21 @@ export default function App() {
           <div className="flex items-center gap-2 shrink-0">
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => setShowSettings(true)}
-              className="w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 text-gray-600 hover:text-gray-300 text-sm transition-all"
+              className="w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 text-gray-600 hover:text-gray-300 transition-all"
               title="API Keys / Settings">
-              ⚙
+              <Settings size={14} />
             </motion.button>
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => setShowShortcuts(true)}
-              className="w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 text-gray-600 hover:text-gray-300 text-sm transition-all"
-              title="Keyboard shortcuts (?)">
-              ?
+              className="w-8 h-8 flex items-center justify-center rounded-xl border border-white/10 text-gray-600 hover:text-gray-300 transition-all"
+              title="Keyboard shortcuts">
+              <Keyboard size={14} />
             </motion.button>
             <input ref={emlRef} type="file" accept=".eml,.txt" onChange={handleEmlUpload} className="hidden" />
             <motion.button whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
               onClick={() => emlRef.current?.click()}
-              className="border border-white/10 hover:border-white/20 text-gray-400 hover:text-white text-xs px-3 py-2 rounded-xl transition-all font-medium">
-              ↑ .eml
+              className="border border-white/10 hover:border-white/20 text-gray-400 hover:text-white text-xs px-3 py-2 rounded-xl transition-all font-medium flex items-center gap-1.5">
+              <Upload size={12} /> .eml
             </motion.button>
 
             <div className="relative">

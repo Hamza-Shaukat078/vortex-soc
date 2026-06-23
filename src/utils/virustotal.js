@@ -1,6 +1,11 @@
 import { getVTKey } from './keyStorage'
 
 const BASE = 'https://www.virustotal.com/api/v3'
+const PROXY = 'https://corsproxy.io/?' // routes around browser CORS block on VT API
+
+function proxyUrl(url) {
+  return PROXY + encodeURIComponent(url)
+}
 
 export function hasVTKey() {
   return !!getVTKey()
@@ -9,7 +14,7 @@ export function hasVTKey() {
 async function vtFetch(path) {
   const key = getVTKey()
   if (!key) throw new Error('VirusTotal API key not configured — add it in Settings')
-  const res = await fetch(`${BASE}${path}`, {
+  const res = await fetch(proxyUrl(`${BASE}${path}`), {
     headers: { 'x-apikey': key },
   })
   if (!res.ok) throw new Error(`VT API ${res.status}`)
@@ -22,7 +27,7 @@ export async function scanUrl(url) {
     const data = await vtFetch(`/urls/${id}`)
     return summariseStats(data.data.attributes.last_analysis_stats, url, 'url')
   } catch {
-    const submit = await fetch(`${BASE}/urls`, {
+    const submit = await fetch(proxyUrl(`${BASE}/urls`), {
       method: 'POST',
       headers: { 'x-apikey': getVTKey(), 'content-type': 'application/x-www-form-urlencoded' },
       body: `url=${encodeURIComponent(url)}`,
